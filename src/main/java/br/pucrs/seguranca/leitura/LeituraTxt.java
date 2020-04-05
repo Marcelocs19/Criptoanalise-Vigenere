@@ -17,11 +17,13 @@ public class LeituraTxt {
 			FileReader fileReader = new FileReader(nome);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-			while ((line = bufferedReader.readLine()) != null) {
+			while (line != null) {
+				line = bufferedReader.readLine();
 				texto += line;				
 			}
 			bufferedReader.close();
 			System.out.println("Texto: " + texto);
+			
 		} catch (FileNotFoundException ex) {
 			System.out.println("Não foi encontrado o arquivo:  " + nome);
 		} catch (IOException ex) {
