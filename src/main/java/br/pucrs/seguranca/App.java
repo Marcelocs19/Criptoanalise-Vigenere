@@ -2,13 +2,13 @@ package br.pucrs.seguranca;
 
 import java.util.Scanner;
 
+import br.pucrs.seguranca.descriptografia.DecifradorTxt;
 import br.pucrs.seguranca.leitura.LeituraTxt;
 
 public class App {
 	
 	public static void main(String[] args) {
-		try {
-			Scanner teclado = new Scanner(System.in);
+		try (Scanner teclado = new Scanner(System.in)){
 
 			LeituraTxt leitura = new LeituraTxt();
 			
@@ -18,11 +18,13 @@ public class App {
 			
 			System.out.println("nome Arquivo: " + nomeArquivo);
 			
-			leitura.leitura(nomeArquivo);
+			System.out.println("TXT: " + leitura.leitura(nomeArquivo));
 			
-			teclado.close();
+			DecifradorTxt decifrador = new DecifradorTxt();
+			
+			System.out.println("AQUI: " + decifrador.decodificarTexto("avelino", leitura.leitura(nomeArquivo)));
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 }
