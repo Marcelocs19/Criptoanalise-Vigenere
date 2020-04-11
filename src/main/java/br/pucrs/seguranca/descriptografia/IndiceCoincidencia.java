@@ -3,41 +3,28 @@ package br.pucrs.seguranca.descriptografia;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class IndiceCoincidencia {
 
 	private Map<Character, Double> indice;
 
 	public double encontrarIndiceDeCoincidencia(String textoCriptografado) {
-		inicializarindiceDeCoincidenciaDasLetras();
-		verificarFrequenciaDeLetrasDoTexto(textoCriptografado);
-
+		inicializarindiceFixo();
+		frequenciaDeLetrasDoTexto(textoCriptografado);
 		double divisor = textoCriptografado.length() * (textoCriptografado.length() - 1);
 
-		verificarIndiceDeCoincidenciaDasLetrasDoTexto();
-
-		return verificarIndiceDeCoincidenciaDoTexto(divisor);
+		indice.forEach((k, v) -> indice.put(k, v * (v - 1)));
+		return indice.values().stream().mapToDouble(Double::valueOf).sum() / divisor;
 	}
 
-	private double verificarIndiceDeCoincidenciaDoTexto(double divisor) {
-		return (indice.values().stream().mapToDouble(Double::valueOf).sum()) / divisor;
-	}
-
-	private void verificarIndiceDeCoincidenciaDasLetrasDoTexto() {
-		indice.forEach((k, v) -> {
-			indice.put(k, v * (v - 1));
-		});
-	}
-	
-	public Map<Character, Double> verificarFrequenciaDeLetrasDoTexto(String texto) {
+		
+	public Map<Character, Double> frequenciaDeLetrasDoTexto(String texto) {
 		for (int i = 0; i < texto.length(); i++) {
-			indice.put(texto.charAt(i),
-					indice.get(texto.charAt(i)) + 1);
-		}		
+			indice.put(texto.charAt(i), indice.get(texto.charAt(i)) + 1);
+		}
 		return indice;
 	}
-	
-	public void inicializarindiceDeCoincidenciaDasLetras() {
+
+	public void inicializarindiceFixo() {
 		indice = new HashMap<>();
 		indice.put('a', 0.0);
 		indice.put('b', 0.0);
@@ -66,6 +53,5 @@ public class IndiceCoincidencia {
 		indice.put('y', 0.0);
 		indice.put('z', 0.0);
 	}
-	
-	
+
 }
