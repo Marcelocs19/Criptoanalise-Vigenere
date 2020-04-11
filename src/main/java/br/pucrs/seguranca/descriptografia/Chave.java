@@ -11,7 +11,7 @@ public class Chave {
 
 	private String alfabeto = "abcdefghijklmnopqrstuvwxyz";
 
-	private Map<Integer, Double> tamanhoChavePorIc;
+	private Map<Integer, Double> chavesIndiceCoincidencia;
 
 	private Map<Character, Double> frequenciaAlfabetoFixo;
 
@@ -29,7 +29,7 @@ public class Chave {
 		arquivoTxt = arquivo;
 		frequenciaLetras = new FrequenciaLetras();
 		indiceCoincidencia = new IndiceCoincidencia();
-		tamanhoChavePorIc = new HashMap<>();
+		chavesIndiceCoincidencia = new HashMap<>();
 		frequenciaAlfabetoFixo = frequenciaLetras.frequenciaLetrasFixa();
 	}
 	
@@ -67,8 +67,8 @@ public class Chave {
 		for(int i = 0; i < palavras.size(); i++) {
 			indice += indiceCoincidencia.encontrarIndiceDeCoincidencia(palavras.get(i));
 		}
-		tamanhoChavePorIc.put(index, indice / index);
-		return tamanhoChavePorIc.entrySet().stream()
+		chavesIndiceCoincidencia.put(index, indice / index);
+		return chavesIndiceCoincidencia.entrySet().stream()
 				.max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
 	}
 
