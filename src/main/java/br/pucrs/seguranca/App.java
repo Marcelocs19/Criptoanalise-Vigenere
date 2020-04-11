@@ -16,13 +16,12 @@ public class App {
 			
 			String nomeArquivo = teclado.nextLine();
 			
-			System.out.println("nome Arquivo: " + nomeArquivo);
-			
-			System.out.println("TXT: " + leitura.leitura(nomeArquivo));
+			System.out.println("Texto Original: " + leitura.leitura(nomeArquivo));
 			
 			DecifradorTxt decifrador = new DecifradorTxt();
 			
-			System.out.println("AQUI: " + decifrador.decodificarTexto("avelino", leitura.leitura(nomeArquivo)));
+			System.out.println("Texto Decifrado: " + decifrador.decodificarTexto(leitura.leitura(nomeArquivo)));
+						
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

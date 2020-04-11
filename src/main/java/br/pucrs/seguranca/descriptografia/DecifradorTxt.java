@@ -2,9 +2,9 @@ package br.pucrs.seguranca.descriptografia;
 
 public class DecifradorTxt {
 	
-	private Chave chaveDecifradora = new Chave();
-	
-	public String decodificarTexto(String chave, String texto) {
+	public String decodificarTexto(String texto) {
+		Chave chaveDecifradora = new Chave(texto);
+		String chave = chaveDecifradora.decifrar();
 		char[] charArray = chave.toCharArray();
 		char[] textoArray = texto.toCharArray();
 		
